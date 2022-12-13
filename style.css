@@ -1,0 +1,168 @@
+html,
+body {
+    /* font-family: "Times New Roman", Times, serif; */
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* overflow: hidden; */
+    /* border: 1px solid red; */
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    /* overflow: hidden; */
+}
+
+.container #map {
+    width: 75vw;
+    height: 100vh;
+    float: right;
+}
+
+.container .slider {
+    width: 25vw;
+    height: 100vh;
+    float: left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.container .slider::-webkit-scrollbar {
+    width: 6px;
+    background-color: #ccc;
+}
+
+.slider .slider-container {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.slider #search_roads {
+    width: 355px;
+    height: 50px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 6px;
+    box-shadow: 1px 1px #ccc;
+}
+
+.slider #search_roads .search_roads--input {
+    margin-left: 20px;
+    font-size: 20px;
+    width: 300px;
+    border: none;
+    outline: none;
+    opacity: 0.8;
+}
+
+.slider #search_roads .search_roads--input::placeholder {
+    font-weight: 400;
+    font-style: italic;
+}
+
+.slider #search_roads .search_roads--btn_click {
+    opacity: 1;
+    color: #0b87ef;
+}
+.slider #search_roads .search_roads--btn {
+    margin-right: 10px;
+    margin-top: 2px;
+    font-size: 24px;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.slider .choice_point {
+    /* width: 400px; */
+    min-height: 100px;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.slider .search_roads_info,
+.slider .roads_info,
+.slider .route {
+    /* width: 400px; */
+    margin-top: 20px;
+}
+
+.slider .search_roads_info h4,
+.slider .roads_info h4,
+.slider .route h4 {
+    margin-left: 10px;
+}
+
+#track-position {
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#track-position #error {
+    color: red;
+}
+
+#track-position #success {
+    color: green;
+}
+
+.set_speed.hideDiv,
+.reverse_route.hideDiv,
+.search_route.hideDiv,
+.route.hideDiv,
+.move.hideDiv,
+.roads_info.hideDiv,
+.data_clear.hideDiv {
+    display: none;
+}
+
+.set_speed,
+.track-position,
+.move,
+.data_clear,
+.search_route,
+.reverse_route {
+    min-height: max-content;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.roads_info {
+    background-color: rgba(162, 182, 100, 0.5);
+}
+
+.road_btn {
+    background-color: rgba(162, 182, 100, 0.8);
+    border: none;
+    color: white; /* White text */
+    border-radius: 4%;
+    cursor: pointer;
+}
+
+.road_btn:disabled {
+    opacity: 0.3;
+}
+
+.road_btn > p > i {
+    font-size: 28px;
+}
+
+.color_green {
+    color: #38b000;
+}
+
+.set_speed .get_speed {
+    font-size: 20px;
+    text-align: center;
+}

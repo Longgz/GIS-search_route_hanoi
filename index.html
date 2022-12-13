@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm đường đi ngắn nhất giữa 2 điểm</title>
+    <link rel="stylesheet" href="./v6.14.1-dist/ol.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styleAlert.css">
+    <link rel="stylesheet" href="./fontawesome-free-6.1.1-web/css/all.css">
+    <script src="./v6.14.1-dist/ol.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="map" class="map">
+        </div>
+
+        <div class="alert2"> 
+            <p class="msg2"></p>
+            <p class="re2"></p>
+            <span class="close-btn-2">
+                <span class="fas fa-times"></span>
+            </span>
+        </div>
+
+        <div class="alert hide">
+            <span class="fas fa-exclamation-circle"></span>
+            <span class="msg">Cảnh báo: Có ngã 3!</span>
+            <span class="close-btn">
+                <span class="fas fa-times"></span>
+            </span>
+        </div>
+
+        <div class="slider">
+            <div class="slider-container">
+                <div id="search_roads">
+                    <input type="text" class="search_roads--input" placeholder="Tìm kiếm tuyến đường">
+                    <button class="search_roads--btn" disabled>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+
+                <div class="search_roads_info">
+                </div>
+
+                <div class="track-position">
+                    <div class="track-position--des">
+                        <h3>Lấy vị trí của bạn</h3>
+                        <!-- <input type="checkbox" id="track" hidden> -->
+                    </div>
+                    <!-- <label for="track"><i class="fa-solid fa-location-crosshairs"></i></label> -->
+                    <button class="road_btn" id="track"><p><i class="fa-solid fa-location-crosshairs"></i></p></button>
+                </div>
+    
+                <div class="choice_point">
+                    <div class="choice_point--des_start">
+                        <h3>Chọn điểm bắt đầu di chuyển: </h3>
+                        <p><i>(Click vào icon start và chọn trên bản đồ)</i></p>
+                        <p class="choice_point--detail_start"></p>
+                    </div>
+                    <button class="road_btn" id="get_start"><p><i class="fas fa-map-pin"></i></p></button>
+                </div>
+
+                <div class="choice_point">
+                    <div class="choice_point--des_end">
+                        <h3>Chọn điểm kết thúc di chuyển: </h3>
+                        <p><i>(Click vào icon end và chọn trên bản đồ)</i></p>
+                        <p class="choice_point--detail_end"></p>
+                    </div>
+                    <button class="road_btn" id="get_end"><p><i class="fas fa-location-dot"></i></p></button>
+                </div>
+
+                <div class="reverse_route hideDiv">
+                    <div class="reverse_route--des">
+                        <h3>Đảo ngược vị trí</h3>
+                    </div>
+                    <button class="road_btn" id="reverse"><p><i class="fas fa-arrows-rotate"></i></p></button>
+                </div>
+
+                <div class="set_speed hideDiv">
+                    <div class="set_speed--des">
+                        <h3>Nhập vào vận tốc của bạn (km/h): </h3>
+                        <p><i>(Vận tốc nhập vào trong khoảng từ 30-50 km/h)</i></p>
+                    </div>
+                    <input type="text" class="get_speed" placeholder="40">
+                </div>
+
+                <div class="search_route hideDiv">
+                    <div class="search_route--des">
+                        <h3>Click để tìm đường ngắn nhất</h3>
+                    </div>
+                    <button class="road_btn" id="abc"><p><i class="fas fa-route"></i></p></button>
+                </div>
+                
+                <div class="route hideDiv">
+                    <h3 class="route_length"></h3>
+                    <h3 class="route_time"></h3>
+                    <p><i class="route_time--des"></i></p>
+                    <h3 class="route_path"></h3>
+                </div>
+                
+                <div class="move hideDiv">
+                    <div class="move--des">
+                        <h3>Click để mô phỏng di chuyển</h3>
+                    </div>
+                    <button class="road_btn" id="start"><p><i class="fas fa-circle-play"></i></p></button>
+                </div>
+
+                <div class="roads_info hideDiv">
+                    <h3>Thông tin tuyến đường hiện tại</h3>
+                </div>
+                
+                <div class="data_clear hideDiv">
+                    <div class="data_clear--des">
+                        <h3>Click để reset</h3>
+                    </div>
+                    <button class="road_btn" id="clear"><p><i class="fas fa-trash-can"></i></p></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <script src="main.js" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>
+        $(".search_roads--input").on("input", function () {
+            if ($(this).val().length > 0) {
+                $(".search_roads--btn").removeAttr("disabled");
+            } else {
+                $(".search_roads--btn").attr("disabled", true);
+            }
+        });
+        $('#get_start').on("click", function() {
+            $(this).attr('disabled', true);
+        })
+        $('#get_end').on("click", function() {
+            $(this).attr('disabled', true);
+        })
+
+        $('#abc').on("click", function() {
+            $(this).attr('disabled', true);
+        })
+
+        $('.alx').click(function() {
+            $('.alert').removeClass('hide');
+            $('.alert').addClass('show');
+            $('.alert').addClass('showAlert');
+            setTimeout(function() {
+                $('.alert').addClass('hide');
+                $('.alert').removeClass('show');
+                $('.alert').removeClass('showAlert');
+            },1000) 
+        })
+        $('.close-btn').click(function() {
+            $('.alert').addClass('hide');
+            $('.alert').removeClass('show');
+        })
+
+        $('.close-btn-2').click(function() {
+            $('.alert2').removeClass('showAlert');
+        })
+    </script>
+</body>
+</html>

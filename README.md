@@ -1,0 +1,2 @@
+-   Cần có Internet để sử dụng.
+-   Khu vực 14 quận trung tâm Hà Nội.
